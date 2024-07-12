@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="container">
+  {% if user.is_authenticated %}
+  <form method="post" enctype="multipart/form-data" action="{% url 'Tweets:comments:comment' pk=tweet.id %}">
+          {% csrf_token %}
+          {{ form.text }}
+          <input type="submit" value="SEND">
+  </form>
+  {% else %}
+    <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong>
+  {% endif %}
+  <div class="comments">
+      <h4>＜コメント一覧＞</h4>
+      {% for comment in comments %}
+      <p>
+        {% if comment.user.pk %}
+            <a href="{% url 'users:mypage' comment.user.pk %}">{{ comment.user.nickname }}</a>
+        {% else %}
+            <span>{{ comment.user.nickname }}</span>
+        {% endif %}
+         {{ comment.text }}
+      </p>
+      {% endfor %}
+  </div>
+  </div>

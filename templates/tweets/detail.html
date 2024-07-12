@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="contents row">
+    <div class="content_post" style="{% if tweet.image %}background-image: url('{{ tweet.image.url }}');{% endif %}" >
+        <div class="more">
+            <span><img src="{% static 'images/arrow_top.png' %}"></span>
+            <ul class="more_list">
+                <li>
+                    <form action="{% url 'Tweets:delete' tweet.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" class="delete-btn" value="削除">
+                    </form>
+                </li>
+                <li>
+                    <a href="{% url 'Tweets:update' tweet.id %}" class="update-btn">編集</a>
+                </li>
+            </ul>
+        </div>
+        <p>{{ tweet.text }}</p>
+        <span class="name"><a href="{% url 'users:mypage' tweet.user.pk %}">
+          <span>投稿者</span>{{ tweet.user.nickname }}</a>
+        </span>
+    </div>
+    {% include 'comments/comment.html' %}
+</div>
+
+{% endblock content %}

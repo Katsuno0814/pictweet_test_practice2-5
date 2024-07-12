@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="contents row">
+  <p>{{ profile_user.nickname }}さんの投稿一覧</p>
+  {% include 'tweets/_tweet_list.html' %}}
+</div>
+
+{% endblock content %}
