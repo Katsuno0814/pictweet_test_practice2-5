@@ -1,4 +1,3 @@
-# factories.py
 import factory
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.conf import settings
@@ -14,6 +13,6 @@ class TweetFactory(factory.django.DjangoModelFactory):
     @factory.lazy_attribute
     def image(self):
         # テスト用の画像ファイルパスを指定
-        image_path = os.path.join(settings.BASE_DIR, 'tests/media/sakura.jpg')
+        image_path = os.path.join(settings.BASE_DIR, 'tests/media/test_image.png')
         with open(image_path, 'rb') as img:
-            return SimpleUploadedFile(name='sakura.jpg', content=img.read(), content_type='image/jpeg')
+            return SimpleUploadedFile(name='test_image.png', content=img.read(), content_type='image/png')
